@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <script>
         tailwind.config = {
@@ -281,6 +283,67 @@
             form button {
                 padding: 14px 24px;
                 font-size: 1rem;
+            }
+        }
+
+        /* Country Code Select Styling */
+        #countryCode {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4af37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 0.75em 0.75em;
+            padding-right: 2rem;
+            padding-left: 0.5rem;
+            min-width: 90px;
+            max-width: 110px;
+            width: auto;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+        }
+
+        #countryCode option {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 0.5rem;
+        }
+
+        #countryCode:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 1px #d4af37;
+        }
+
+        #countryCode:hover {
+            border-color: #475569;
+        }
+
+        /* Phone input container */
+        .phone-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .phone-container input {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            font-size: 1rem;
+            letter-spacing: 0.025em;
+        }
+
+        @media (max-width: 640px) {
+            .phone-container {
+                flex-direction: column;
+            }
+            
+            #countryCode {
+                width: 100%;
+                min-width: unset;
             }
         }
 
@@ -607,7 +670,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
                     <img src="logo.PNG" alt="Sigma Enterprise Logo" class="w-12 h-12 sm:w-16 sm:h-16 object-contain logo-nav cursor-pointer" loading="eager">
-                    <span class="font-bold text-base sm:text-xl text-sigma-gold tracking-wider hidden sm:inline">SIGMA <span class="text-sigma-gold">ENTERPRISE</span></span>
+                    <span class="font-bold text-xs sm:text-base md:text-xl text-sigma-gold tracking-wider">SIGMA <span class="text-sigma-gold">ENTERPRISE</span></span>
                 </div>
                 
                 <!-- Desktop Menu -->
@@ -642,7 +705,7 @@
             </div>
         </div>
 
-                <!-- Mobile Menu -->
+        <!-- Mobile Menu -->
         <div class="md:hidden hidden bg-sigma-black border-t border-gray-800" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" onclick="toggleMobileMenu()" class="text-white block px-4 py-3 rounded-md text-base font-medium hover:bg-gray-800 active:bg-gray-700 touch-manipulation">Home</a>
@@ -902,12 +965,54 @@
                             </div>
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-400 mb-2">Phone</label>
-                                <input type="tel" id="phone" name="phone" required autocomplete="tel" class="w-full bg-sigma-navy border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sigma-gold focus:ring-1 focus:ring-sigma-gold transition-colors min-h-[48px]">
+                                <div class="phone-container">
+                                    <select id="countryCode" name="countryCode" class="bg-sigma-navy border border-gray-700 rounded-lg px-2 py-3 text-white focus:outline-none focus:border-sigma-gold focus:ring-1 focus:ring-sigma-gold transition-colors min-h-[48px] cursor-pointer text-sm">
+                                        <option value="+91" selected>🇮🇳 +91</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+44">🇬🇧 +44</option>
+                                        <option value="+971">🇦🇪 +971</option>
+                                        <option value="+966">🇸🇦 +966</option>
+                                        <option value="+65">🇸🇬 +65</option>
+                                        <option value="+60">🇲🇾 +60</option>
+                                        <option value="+61">🇦🇺 +61</option>
+                                        <option value="+86">🇨🇳 +86</option>
+                                        <option value="+81">🇯🇵 +81</option>
+                                        <option value="+82">🇰🇷 +82</option>
+                                        <option value="+33">🇫🇷 +33</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+39">🇮🇹 +39</option>
+                                        <option value="+34">🇪🇸 +34</option>
+                                        <option value="+31">🇳🇱 +31</option>
+                                        <option value="+32">🇧🇪 +32</option>
+                                        <option value="+41">🇨🇭 +41</option>
+                                        <option value="+46">🇸🇪 +46</option>
+                                        <option value="+47">🇳🇴 +47</option>
+                                        <option value="+45">🇩🇰 +45</option>
+                                        <option value="+358">🇫🇮 +358</option>
+                                        <option value="+351">🇵🇹 +351</option>
+                                        <option value="+353">🇮🇪 +353</option>
+                                        <option value="+48">🇵🇱 +48</option>
+                                        <option value="+420">🇨🇿 +420</option>
+                                        <option value="+36">🇭🇺 +36</option>
+                                        <option value="+40">🇷🇴 +40</option>
+                                        <option value="+7">🇷🇺 +7</option>
+                                        <option value="+90">🇹🇷 +90</option>
+                                        <option value="+20">🇪🇬 +20</option>
+                                        <option value="+27">🇿🇦 +27</option>
+                                        <option value="+55">🇧🇷 +55</option>
+                                        <option value="+52">🇲🇽 +52</option>
+                                        <option value="+54">🇦🇷 +54</option>
+                                        <option value="+64">🇳🇿 +64</option>
+                                    </select>
+                                    <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="98244 11533" class="flex-1 bg-sigma-navy border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sigma-gold focus:ring-1 focus:ring-sigma-gold transition-colors min-h-[48px]">
+                                </div>
+                                <p id="phoneError" class="hidden text-red-400 text-sm mt-1">Please enter a valid phone number</p>
                             </div>
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
                             <input type="email" id="email" name="email" required autocomplete="email" class="w-full bg-sigma-navy border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sigma-gold focus:ring-1 focus:ring-sigma-gold transition-colors min-h-[48px]">
+                            <p id="emailError" class="hidden text-red-400 text-sm mt-1">Please enter a valid email address</p>
                         </div>
                         <div>
                             <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
@@ -1112,7 +1217,340 @@
             });
         });
 
-        // Form Handling - Send Email to contact@sigma-enterprise.com
+        // Country code and phone number validation
+        const countryCodeSelect = document.getElementById('countryCode');
+        const phoneInput = document.getElementById('phone');
+        const phoneError = document.getElementById('phoneError');
+
+        // Country-specific phone number length requirements
+        const countryPhoneLengths = {
+            '+91': { min: 10, max: 10 }, // India
+            '+1': { min: 10, max: 10 },  // US/Canada
+            '+44': { min: 10, max: 10 }, // UK
+            '+971': { min: 9, max: 9 },  // UAE
+            '+966': { min: 9, max: 9 },  // Saudi Arabia
+            '+65': { min: 8, max: 8 },   // Singapore
+            '+60': { min: 9, max: 10 },  // Malaysia
+            '+61': { min: 9, max: 9 },   // Australia
+            '+86': { min: 11, max: 11 }, // China
+            '+81': { min: 10, max: 11 }, // Japan
+            '+82': { min: 10, max: 11 }, // South Korea
+            '+33': { min: 9, max: 9 },   // France
+            '+49': { min: 10, max: 11 }, // Germany
+            '+39': { min: 9, max: 10 },  // Italy
+            '+34': { min: 9, max: 9 },   // Spain
+            '+31': { min: 9, max: 9 },   // Netherlands
+            '+32': { min: 9, max: 9 },   // Belgium
+            '+41': { min: 9, max: 9 },   // Switzerland
+            '+46': { min: 9, max: 9 },   // Sweden
+            '+47': { min: 8, max: 8 },   // Norway
+            '+45': { min: 8, max: 8 },   // Denmark
+            '+358': { min: 9, max: 10 }, // Finland
+            '+351': { min: 9, max: 9 },  // Portugal
+            '+353': { min: 9, max: 9 },  // Ireland
+            '+48': { min: 9, max: 9 },   // Poland
+            '+420': { min: 9, max: 9 },  // Czech Republic
+            '+36': { min: 9, max: 9 },  // Hungary
+            '+40': { min: 10, max: 10 }, // Romania
+            '+7': { min: 10, max: 10 },  // Russia
+            '+90': { min: 10, max: 10 }, // Turkey
+            '+20': { min: 10, max: 10 }, // Egypt
+            '+27': { min: 9, max: 9 },   // South Africa
+            '+55': { min: 10, max: 11 }, // Brazil
+            '+52': { min: 10, max: 10 }, // Mexico
+            '+54': { min: 10, max: 10 }, // Argentina
+            '+64': { min: 8, max: 10 }  // New Zealand
+        };
+
+        // Phone Number Validation Function
+        function validatePhoneNumber(phone, countryCode) {
+            // Remove all non-digit characters
+            const cleaned = phone.replace(/\D/g, '');
+            
+            // Get expected length for the country
+            const expectedLength = countryPhoneLengths[countryCode];
+            if (!expectedLength) {
+                // Default validation for unknown countries
+                return cleaned.length >= 8 && cleaned.length <= 15;
+            }
+            
+            // Validate based on country-specific requirements
+            return cleaned.length >= expectedLength.min && cleaned.length <= expectedLength.max;
+        }
+
+        // Get full phone number with country code
+        function getFullPhoneNumber() {
+            const countryCode = countryCodeSelect.value;
+            const phone = phoneInput.value.trim().replace(/\D/g, '');
+            return countryCode + phone;
+        }
+
+        // Real-time phone validation
+        function validatePhoneInput() {
+            const phone = phoneInput.value.trim();
+            const countryCode = countryCodeSelect.value;
+            
+            if (phone.length > 0) {
+                if (!validatePhoneNumber(phone, countryCode)) {
+                    const expectedLength = countryPhoneLengths[countryCode];
+                    phoneInput.classList.add('border-red-500');
+                    phoneInput.classList.remove('border-gray-700');
+                    if (expectedLength) {
+                        phoneError.textContent = `Please enter a valid phone number (${expectedLength.min}-${expectedLength.max} digits)`;
+                    } else {
+                        phoneError.textContent = 'Please enter a valid phone number';
+                    }
+                    phoneError.classList.remove('hidden');
+                    return false;
+                } else {
+                    phoneInput.classList.remove('border-red-500');
+                    phoneInput.classList.add('border-gray-700');
+                    phoneError.classList.add('hidden');
+                    return true;
+                }
+            } else {
+                phoneInput.classList.remove('border-red-500');
+                phoneInput.classList.add('border-gray-700');
+                phoneError.classList.add('hidden');
+                return false;
+            }
+        }
+
+        phoneInput.addEventListener('input', validatePhoneInput);
+        phoneInput.addEventListener('blur', validatePhoneInput);
+        
+        // Re-validate when country code changes
+        countryCodeSelect.addEventListener('change', function() {
+            validatePhoneInput();
+        });
+
+        // Email validation - Block fake/dummy emails
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+
+        // List of common fake/dummy email patterns and domains
+        const fakeEmailPatterns = [
+            /^test@/i,
+            /^fake@/i,
+            /^dummy@/i,
+            /^example@/i,
+            /^sample@/i,
+            /^temp@/i,
+            /^temporary@/i,
+            /^123@/i,
+            /^abc@/i,
+            /^xyz@/i,
+            /^admin@/i,
+            /^user@/i,
+            /^guest@/i,
+            /^demo@/i,
+            /^no@/i,
+            /^yes@/i,
+            /^noreply@/i,
+            /^donotreply@/i
+        ];
+
+        // List of disposable/temporary email domains
+        const disposableEmailDomains = [
+            'tempmail.com',
+            'temp-mail.org',
+            'guerrillamail.com',
+            'mailinator.com',
+            '10minutemail.com',
+            'throwaway.email',
+            'fakemailgenerator.com',
+            'tempmailo.com',
+            'getnada.com',
+            'mohmal.com',
+            'yopmail.com',
+            'sharklasers.com',
+            'grr.la',
+            'guerrillamailblock.com',
+            'pokemail.net',
+            'spam4.me',
+            'trashmail.com',
+            'mintemail.com',
+            'emailondeck.com',
+            'fakeinbox.com',
+            'getairmail.com',
+            'meltmail.com',
+            'melt.li',
+            '33mail.com',
+            'maildrop.cc',
+            'mytrashmail.com',
+            'tempail.com',
+            'dispostable.com',
+            'mailcatch.com',
+            'emailias.com',
+            'spambox.us',
+            'spamgourmet.com',
+            'spamhole.com',
+            'spam.la',
+            'spamevader.com',
+            'spamfree24.org',
+            'test.com',
+            'test.org',
+            'test.net',
+            'fake.com',
+            'fake.org',
+            'fake.net',
+            'dummy.com',
+            'dummy.org',
+            'example.com',
+            'example.org',
+            'example.net',
+            'sample.com',
+            'sample.org',
+            'temp.com',
+            'temp.org',
+            'temporary.com',
+            'temporary.org'
+        ];
+
+        // Common fake email domains
+        const fakeEmailDomains = [
+            'test.com',
+            'test.org',
+            'test.net',
+            'fake.com',
+            'fake.org',
+            'fake.net',
+            'dummy.com',
+            'dummy.org',
+            'example.com',
+            'example.org',
+            'example.net',
+            'sample.com',
+            'sample.org',
+            'temp.com',
+            'temp.org',
+            'temporary.com',
+            'temporary.org',
+            '123.com',
+            'abc.com',
+            'xyz.com',
+            'invalid.com',
+            'notreal.com',
+            'noreply.com',
+            'donotreply.com'
+        ];
+
+        // Comprehensive email validation function
+        function validateEmail(email) {
+            if (!email || email.trim() === '') {
+                return { valid: false, message: 'Email is required' };
+            }
+
+            const trimmedEmail = email.trim().toLowerCase();
+
+            // Basic format validation (more strict)
+            const emailRegex = /^[a-z0-9]([a-z0-9._-]*[a-z0-9])?@[a-z0-9]([a-z0-9.-]*[a-z0-9])?\.[a-z]{2,}$/i;
+            
+            if (!emailRegex.test(trimmedEmail)) {
+                return { valid: false, message: 'Please enter a valid email address format' };
+            }
+
+            // Check for consecutive dots
+            if (trimmedEmail.includes('..')) {
+                return { valid: false, message: 'Email cannot contain consecutive dots' };
+            }
+
+            // Check for invalid characters
+            if (!/^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(trimmedEmail)) {
+                return { valid: false, message: 'Email contains invalid characters' };
+            }
+
+            // Extract domain
+            const domain = trimmedEmail.split('@')[1];
+
+            // Check for fake email patterns in local part
+            for (const pattern of fakeEmailPatterns) {
+                if (pattern.test(trimmedEmail)) {
+                    return { valid: false, message: 'Please use a real email address, not a test or fake email' };
+                }
+            }
+
+            // Check for disposable email domains
+            if (disposableEmailDomains.includes(domain)) {
+                return { valid: false, message: 'Disposable/temporary email addresses are not allowed. Please use a permanent email address' };
+            }
+
+            // Check for fake email domains
+            if (fakeEmailDomains.includes(domain)) {
+                return { valid: false, message: 'Please use a real email address, not a test or fake email' };
+            }
+
+            // Check for common test patterns in domain
+            if (domain.startsWith('test.') || domain.startsWith('fake.') || domain.startsWith('dummy.') || 
+                domain.startsWith('example.') || domain.startsWith('sample.') || domain.startsWith('temp.')) {
+                return { valid: false, message: 'Please use a real email address, not a test or fake email' };
+            }
+
+            // Check for very short domains (likely fake)
+            if (domain.length < 4) {
+                return { valid: false, message: 'Please enter a valid email address' };
+            }
+
+            // Check for domains without proper TLD
+            const tldRegex = /\.[a-z]{2,}$/i;
+            if (!tldRegex.test(domain)) {
+                return { valid: false, message: 'Email must have a valid domain extension (e.g., .com, .org)' };
+            }
+
+            // Check for local part that's too short or suspicious
+            const localPart = trimmedEmail.split('@')[0];
+            if (localPart.length < 2) {
+                return { valid: false, message: 'Email username is too short' };
+            }
+
+            // Check for only numbers in local part (suspicious)
+            if (/^\d+$/.test(localPart)) {
+                return { valid: false, message: 'Email username cannot be only numbers' };
+            }
+
+            // Check for common fake patterns like "test123", "fake123", etc.
+            if (/^(test|fake|dummy|example|sample|temp|temporary)\d*$/i.test(localPart)) {
+                return { valid: false, message: 'Please use a real email address, not a test or fake email' };
+            }
+
+            return { valid: true, message: '' };
+        }
+
+        // Real-time email validation
+        function validateEmailInput() {
+            const email = emailInput.value.trim();
+            
+            if (email.length > 0) {
+                const validation = validateEmail(email);
+                if (!validation.valid) {
+                    emailInput.classList.add('border-red-500');
+                    emailInput.classList.remove('border-gray-700');
+                    emailError.textContent = validation.message;
+                    emailError.classList.remove('hidden');
+                    return false;
+                } else {
+                    emailInput.classList.remove('border-red-500');
+                    emailInput.classList.add('border-gray-700');
+                    emailError.classList.add('hidden');
+                    return true;
+                }
+            } else {
+                emailInput.classList.remove('border-red-500');
+                emailInput.classList.add('border-gray-700');
+                emailError.classList.add('hidden');
+                return false;
+            }
+        }
+
+        emailInput.addEventListener('input', validateEmailInput);
+        emailInput.addEventListener('blur', validateEmailInput);
+
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("4naLj7RZUbghRPfV9");
+        })();
+
+        // Form Handling - Send Email directly to contact@sigma-enterprise.com using EmailJS
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const btn = this.querySelector('button[type="submit"]');
@@ -1125,45 +1563,103 @@
             errorMsgDiv.classList.add('hidden');
             
             // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = phoneInput.value.trim();
+            const countryCode = countryCodeSelect.value;
+            const message = document.getElementById('message').value.trim();
             
-            // Create email content
-            const subject = encodeURIComponent('Contact Form Submission from ' + name);
-            const body = encodeURIComponent(
-                'Name: ' + name + '\n' +
-                'Email: ' + email + '\n' +
-                'Phone: ' + phone + '\n\n' +
-                'Message:\n' + message
-            );
+            // Validate phone number
+            if (!validatePhoneInput()) {
+                phoneInput.focus();
+                return;
+            }
             
-            // Create mailto link
-            const mailtoLink = 'mailto:contact@sigma-enterprise.com?subject=' + subject + '&body=' + body;
+            // Get full phone number with country code
+            const fullPhoneNumber = getFullPhoneNumber();
             
-            btn.innerText = 'Opening Email...';
+            // Validate required fields
+            if (!name || !email || !message) {
+                errorMsgDiv.textContent = 'Please fill in all required fields.';
+                errorMsgDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // Validate email (comprehensive validation including fake/dummy email check)
+            const emailValidation = validateEmail(email);
+            if (!emailValidation.valid) {
+                errorMsgDiv.textContent = emailValidation.message;
+                errorMsgDiv.classList.remove('hidden');
+                emailInput.focus();
+                return;
+            }
+            
+            btn.innerText = 'Sending...';
             btn.disabled = true;
+
+            // Send email using EmailJS
+            // Service ID: service_qxu9nr4
+            // Template ID: template_nncps6w
+            // Get current date and time
+            const now = new Date();
+            const timeString = now.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
             
-            // Open email client with pre-filled information
-            window.location.href = mailtoLink;
-            
-            // Reset form and show success message
-            setTimeout(() => {
+            emailjs.send("service_qxu9nr4", "template_nncps6w", {
+                to_email: 'contact@sigma-enterprise.com',
+                name: name,
+                email: email,
+                phone: fullPhoneNumber,
+                message: message,
+                time: timeString,
+                title: name,
+                reply_to: email,
+                subject: 'Contact Us: ' + name
+            })
+            .then(function(response) {
+                // Success
                 btn.innerText = originalText;
                 btn.disabled = false;
                 document.getElementById('contactForm').reset();
                 
                 // Show success message
                 msgDiv.className = 'p-4 rounded-lg bg-green-900/50 border border-green-500 text-green-200 text-center';
-                msgDiv.textContent = 'Your email client should open. If it doesn\'t, please email us at contact@sigma-enterprise.com';
+                msgDiv.textContent = 'Thank you! Your message has been sent successfully. We will get back to you soon.';
                 msgDiv.classList.remove('hidden');
                 
-                // Hide success message after 8 seconds
+                // Hide success message after 5 seconds
                 setTimeout(() => {
                     msgDiv.classList.add('hidden');
+                }, 5000);
+            }, function(error) {
+                // Error
+                console.error('EmailJS Error:', error);
+                btn.innerText = originalText;
+                btn.disabled = false;
+                
+                // Show error message
+                let errorMessage = 'There was an error sending your message. ';
+                if (error.text && error.text.includes('Invalid')) {
+                    errorMessage = 'Email service not configured. Please contact the administrator or email us directly at contact@sigma-enterprise.com';
+                } else {
+                    errorMessage += 'Please try again or contact us directly at contact@sigma-enterprise.com';
+                }
+                
+                errorMsgDiv.textContent = errorMessage;
+                errorMsgDiv.classList.remove('hidden');
+                
+                // Hide error message after 8 seconds
+                setTimeout(() => {
+                    errorMsgDiv.classList.add('hidden');
                 }, 8000);
-            }, 500);
+            });
         });
     </script>
 </body>
